@@ -14,13 +14,16 @@ public class File {
 	private String name;
 	private String type;
 	private String fileSize;
-	private Blob data;
+
+	@Lob
+    @Column(name = "data", columnDefinition="BLOB")
+	private byte[] data;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public File(Long id, String name, String type, String fileSize, Blob data, User user) {
+	public File(Long id, String name, String type, String fileSize, byte[] data, User user) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -72,11 +75,11 @@ public class File {
 		this.user = user;
 	}
 
-	public Blob getData() {
+	public byte[] getData() {
 		return data;
 	}
 
-	public void setData(Blob data) {
+	public void setData(byte[] data) {
 		this.data = data;
 	}
 }

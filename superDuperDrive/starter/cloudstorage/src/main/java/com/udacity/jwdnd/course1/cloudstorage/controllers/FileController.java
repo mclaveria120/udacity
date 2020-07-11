@@ -46,7 +46,7 @@ public class FileController {
 		return ResponseEntity.ok()
 			                .contentType(MediaType.parseMediaType(file.getType()))
 			                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
-			                .body(new ByteArrayResource(file.getData().getBytes(1, (int)file.getData().length())));
+			                .body(new ByteArrayResource(file.getData()));
 		
 	}
 	
@@ -64,8 +64,8 @@ public class FileController {
 			file.setType(multipartFile.getContentType());
 			file.setFileSize(multipartFile.getSize()+"");
 			try {
-				file.setData( this.fileService.convertToBlob(multipartFile.getBytes()));
-			} catch (SQLException | IOException e) {
+				file.setData(multipartFile.getBytes());
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		return file;

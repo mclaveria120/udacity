@@ -36,10 +36,6 @@ public class FileService {
 		this.fileMapper.deleteByIdAndUserId(fileId,userId);
 	}
 	
-	public Blob convertToBlob(byte[] bytes) throws SQLException{
-		return new javax.sql.rowset.serial.SerialBlob(bytes);
-	}
-
 	public File getById(long fileId, long userId) {
 		File file = this.fileMapper.findByIdAndUserId(fileId,userId);
 		return file;
